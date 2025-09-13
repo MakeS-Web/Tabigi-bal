@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabigi Ball - Improved Gallery</title>
+    <link rel="icon" href="images/Tabigi Bal Logo.jpg">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f7f4;
+            overflow-x: hidden;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: white;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icons {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .icons img {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .icons img:hover {
+            transform: scale(1.1);
+        }
+
+        header ul {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            font-size: 18px;
+        }
+
+        header li {
+            list-style: none;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #5D6863;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        header a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #B8AE9D;
+            transition: width 0.3s ease;
+        }
+
+        header a:hover::after {
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            color: #5D6863;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid #D8B26E;
+            object-fit: cover;
+        }
+
+        .logo h2 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .welcome {
+            width: 100%;
+            padding-top: 100px;
+            position: relative;
+        }
+
+        #main-img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+        }
+
+        .me {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .me img {
+            width: 350px;
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        .text {
+            width: 400px;
+            padding: 30px;
+            color: white;
+            background-color: rgba(93, 104, 99, 0.85);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .text h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #F8D568;
+        }
+
+        .text p {
+            font-size: 17px;
+            line-height: 1.6;
+            span{
+                font-weight: 800;
+            }
+        }
+
+        /* Products Section - UPDATED TO GRID LAYOUT */
+        #products {
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, #f8f4eb, #fff);
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #5D6863;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #D8B26E;
+            border-radius: 2px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            background: white;
+            h4{
+                color: #5D6863;
+            }
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #5D6863;
+        }
+
+        .product-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #666;
+        }
+
+        /* Why Us Section */
+        #why-us {
+            padding: 100px 5%;
+            background-color: #fff;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 60px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .feature-title {
+            color: #5D6863;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section - IMPROVED FOR TALL IMAGES */
+        #gallery {
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, #fff, #f8f7f4);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 500px;
+            /* Increased height for tall images */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        /* Footer - UPDATED WITH PROPER ICONS */
+        footer {
+            background: linear-gradient(to bottom, #5D6863, #4a534e);
+            color: white;
+            padding: 80px 5% 40px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid #B8AE9D;
+        }
+
+        .footer-logo h3 {
+            font-size: 22px;
+        }
+
+        .footer-description {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-social img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer-contact h3,
+        .footer-location h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-contact h3::after,
+        .footer-location h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #D8B26E;
+        }
+
+        .contact-item,
+        .location-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon,
+        .location-icon {
+            font-size: 20px;
+            color: #D8B26E;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            width: 30px;
+            height: 3px;
+            background-color: #5D6863;
+            border-radius: 5px;
+            transition: all 0.3s linear;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 1200px) {
+            .me {
+                left: 5%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            header {
+                padding: 0 20px;
+            }
+
+            .me {
+                flex-direction: column;
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 50px auto;
+                width: 90%;
+                text-align: center;
+            }
+
+            .text {
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            /* Adjust gallery for tablets */
+            .gallery-item {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                height: 80px;
+                padding: 0 15px;
+            }
+
+            .logo img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo h2 {
+                font-size: 20px;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            header ul {
+                display: none;
+                flex-direction: column;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+
+            header ul.active {
+                display: flex;
+            }
+
+            header li {
+                margin: 10px 0;
+            }
+
+            .icons {
+                display: none;
+            }
+
+            .welcome {
+                padding-top: 80px;
+            }
+
+            #main-img {
+                display: none;
+            }
+
+            .me {
+                margin: 30px auto;
+                gap: 30px;
+            }
+
+            .me img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+
+            .text {
+                padding: 20px;
+            }
+
+            .text h1 {
+                font-size: 26px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .feature-card {
+                padding: 30px 20px;
+            }
+
+            /* Adjust gallery for mobile */
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                height: 500px;
+                /* Keep tall images on mobile */
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-item,
+            .location-item {
+                justify-content: center;
+            }
+
+            .footer-contact h3::after,
+            .footer-location h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h2 {
+                font-size: 18px;
+            }
+
+            .text h1 {
+                font-size: 22px;
+            }
+
+            .text p {
+                font-size: 15px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .feature-icon {
+                font-size: 50px;
+            }
+
+            .feature-title {
+                font-size: 20px;
+            }
+
+            /* Slightly reduce gallery height on very small screens */
+            .gallery-item {
+                height: 450px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/Tabigi Bal Logo.jpg" alt="Tabigi Ball Logo">
+            <h2>Tabigi Ball</h2>
+        </div>
+
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul>
+            <li><a href="#welcome">Біз Туралы</a></li>
+            <li><a href="#products">Біздің өнімдер</a></li>
+            <li><a href="#why-us">Не үшін біз?</a></li>
+            <li><a href="#contact">Хабарда болу үшін</a></li>
+        </ul>
+
+        <div class="icons">
+            <a href="https://www.instagram.com/tabigi_balkz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                <img src="images/instagram.png" alt="Instagram">
+            </a>
+            <a href="https://t.me/+77007380979">
+                <img src="images/telegram.png" alt="Telegram">
+            </a>
+            <a href="https://wa.me/+7007380979">
+                <img src="images/apple.png" alt="WhatsApp">
+            </a>
+        </div>
+    </header>
+
+    <section id="welcome" class="welcome">
+        <img src="images/Honey-Nutrition.jpg" alt="Honey Nutrition" id="main-img">
+        <div class="me">
+            <img src="images/photo_2025-09-01_15-40-41.jpg" alt="About Me">
+            <div class="text">
+                <h1>Мен Туралы</h1>
+                <p><span>Сәлем!</span> Менің атым – Хамза. Бал саласындағы жолымды 2022 жылы, 12 жасымда бастадым. Осы уақыт ішінде Қазақстанның
+                түкпір-түкпірінен түрлі бал жинап, оны тиімді бағада ұсынып келемін.
+                Менің мақсатым – өз кәсібімді дамытып қана қоймай, сіздерге зиянды қанттың орнын сапалы әрі табиғи балмен алмастыруға
+                көмектесу.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2 class="section-title">Біздің өнімдер</h2>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="images/Aqqurai.jpg" alt="Flower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Аққурай Балы</h3>
+                    <p class="product-description">Аққурай балы – ақшыл түсті, нәзік иісті бал. Асқазан-ішек жолдарын тыныштандырып, жүйке жүйесін қалыпқа келтіруге
+                    көмектеседі.</p>
+                    <h4>3300tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="images/Exporset.jpg" alt="Forest Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Экспорцет Балы</h3>
+                    <p class="product-description">Экпортцет балы – сирек кездесетін дәрілік өсімдіктерден жиналады. Иммунитетті күшейтіп, қабынуға қарсы әсер береді.</p>
+                    <h4>3000tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="images/Grechiha.jpg" alt="Lavender Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Гречиха Балы</h3>
+                    <p class="product-description">Гречиха (қарақұмық) балы – қою түсті, дәмі қанық. Қан айналымын жақсартып, гемоглобинді көтеруге пайдалы.</p>
+                    <h4>2800tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="images/Kunbagys.jpg" alt="Acacia Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Күнбағыс Балы</h3>
+                    <p class="product-description">Күнбағыс балы – ашық сары түсті, тез қатаятын бал. Жүрек пен қан тамырларына жақсы әсер етеді, ағзаны қуаттандырады.</p>
+                    <h4>2600tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="images/Kuskut.jpg" alt="Buckwheat Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Кускут Балы</h3>
+                    <p class="product-description">Кускут (паразит өсімдік) балы – емдік қасиеті жоғары, ерекше хош иісті. Бауыр мен ас қорыту жүйесіне пайдалы.</p>
+                    <h4>3600tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="images/Raznotravie.jpg" alt="Manuka Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Разнотравие Балы</h3>
+                    <p class="product-description">Разнотравие (шөп балдары) – түрлі гүлдерден жиналған бал. Жалпы иммунитетті көтеріп, суық тиюден қорғайды.</p>
+                    <h4>2800tg</h4>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <img src="images/Zhantaq.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Жантақ Балы</h3>
+                    <p class="product-description">Жантақ балы – түсі ашық, дәмі жұмсақ әрі тез кристалданбайды. Асқазан ауруларына пайдалы және қуат береді.</p>
+                    <h4>3000tg</h4>
+                </div>
+            </div>
+            <!-- Product 8 -->
+            <div class="product-card">
+                <img src="images/Diagil.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Дягиль Балы</h3>
+                    <p class="product-description">Дягиль балы – қою қоңыр түсті, өзіндік хош иісі бар сирек бал. Қан қысымын реттеуге, жүйке жүйесін тыныштандыруға және
+                    күш-қуатты арттыруға пайдалы.</p>
+                    <h4>3800tg</h4>
+                </div>
+            </div>
+            <!-- Product 9 -->
+            <div class="product-card">
+                <img src="images/Peschannaia Akkasia.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Песчанная Аккация</h3>
+                    <p class="product-description">Песчанная акация балы – ашық түсті, дәмі нәзік әрі хош иісті. Асқазанды тыныштандырады, ұйқыны жақсартады және
+                    иммунитетті көтереді.</p>
+                    <h4>3000tg</h4>
+                </div>
+            </div>
+            <!-- Product 10 -->
+            <div class="product-card">
+                <img src="images/Propolis.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Прополис</h3>
+                    <p class="product-description">Прополис – араның табиғи антибиотигі. Микробтарға қарсы әсер етіп, жара жазуды тездетеді.</p>
+                    <h4>1000-1400tg</h4>
+                </div>
+            </div>
+            <!-- Product 11 -->
+            <div class="product-card">
+                <img src="images/Pchelinoe moloko.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Ара сүті</h3>
+                    <p class="product-description">Ара сүті (патша сүті) – аралар тек патшайымды қоректендіретін құнды өнім. Жасартушы әсерге ие, иммунитетті көтереді.</p>
+                    <h4>12000tg</h4>
+                </div>
+            </div>
+            <!-- Product 12 -->
+            <div class="product-card">
+                <img src="images/Pchelinye Pylsa.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Ара тозаңы</h3>
+                    <p class="product-description">Ара тозаңы – гүлдің тозаңынан жасалған өнім. Витаминдерге бай, шаршауды басып, ағзаны күшейтеді.</p>
+                    <h4>6000tg</h4>
+                </div>
+            </div>
+            <!-- Product 13 -->
+            <div class="product-card">
+                <img src="images/Perga.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Перга</h3>
+                    <p class="product-description">Перга (ара наны) – аралар сақтап, ашыту арқылы жасаған тозаң. Қан құрамын жақсартып, ағзаны минералдармен толықтырады.</p>
+                    <h4>5000tg/200g</h4>
+                </div>
+            </div>
+            <!-- Product 14 -->
+            <div class="product-card">
+                <img src="images/Soty.jpg" alt="Wildflower Honey" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Соты</h3>
+                    <p class="product-description">Перга (ара наны) – аралар сақтап, ашыту арқылы жасаған тозаң. Қан құрамын жақсартып, ағзаны минералдармен толықтырады.</p>
+                    <h4>1000-1500tg</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us">
+        <h2 class="section-title">Не үшін біз?</h2>
+
+        <div class="features-container">
+            <div class="feature-card animate">
+                <span class="feature-icon">🏆</span>
+                <h3 class="feature-title">Табиғи Өндіріс пен Жоғары Сапа</h3>
+                <p class="feature-description">Біздің бал тек табиғи гүлдерден жиналады, құрамында химиялық қоспалар жоқ. Әрбір банка бал мұқият тексеріліп, жоғары
+                сапа стандарттарына сай ұсынылады.
+                </p>
+            </div>
+
+            <div class="feature-card animate">
+                <span class="feature-icon">🚚</span>
+                <h3 class="feature-title">Жылдам жеткізу – Шамалған бойынша</h3>
+                <p class="feature-description">Уақытыңызды бағалаймыз, сондықтан балды үйіңіздің табалдырығына дейін тез әрі ыңғайлы жеткізіп береміз.</p>
+            </div>
+
+            <div class="feature-card animate">
+                <span class="feature-icon">🌱</span>
+                <h3 class="feature-title">Түрлі Түйіндер (Әр алуандылық)</h3>
+                <p class="feature-description">Клиенттерімізге әртүрлі бал түрлерін ұсынамыз. Әрқайсысы ерекше дәмімен және пайдалы қасиеттерімен ерекшеленеді.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="gallery">
+        <h2 class="section-title">Сипаттамалар</h2>
+
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="images/Kunbagyss.jpg" alt="Kunbagys Honey" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="images/karakumyk.jpg" alt="Karakumyk Honey" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="images/photo_2025-09-01_14-44-21.jpg" alt="Beekeeping" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="images/esporset.jpg" alt="Esporset Honey" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="images/akkuray.jpg" alt="Akkuray Honey" class="gallery-img">
+            </div>
+            <div class="gallery-item">
+                <img src="images/zantaq.jpg" alt="Zantaq Honey" class="gallery-img">
+            </div>
+        </div>
+    </section> -->
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-info">
+                <div class="footer-logo">
+                    <img src="images/Tabigi Bal Logo.jpg" alt="Tabigi Ball Logo">
+                    <h3>Tabigi Ball</h3>
+                </div>
+                <p class="footer-description">Табиғи бал өндірісі. Көпжылдық тәжірибе мен араға деген сүйіспеншілік арқылы жұмыс істейміз. Табиғат пен оның сыйлаған
+                байлығына сүйене отырып, біздің араларымыз ұрпақтан-ұрпаққа ең таза бал өндіруді жалғастыруда.</p>
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/tabigi_balkz">
+                        <img src="images/instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://t.me/+77007380979">
+                        <img src="images/telegram.png" alt="Telegram">
+                    </a>
+                    <a href="https://wa.me/+7007380979">
+                        <img src="images/apple.png" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Хабарласу үшін</h3>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>+7 700 738 0979</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>tabigi.bal@example.com</span>
+                </div>
+            </div>
+
+            <div class="footer-location">
+                <h3>Тікелей бізден алу үшін</h3>
+                <div class="location-item">
+                    <span class="location-icon">📍</span>
+                    <span>Kazakhstan, Almaty, Shamalgan</span>
+                </div>
+                <div class="location-item">
+                    <span class="location-icon">🕒</span>
+                    <span>Дүйсенбі - Сенбі: 9:00 - 18:00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2023 Tabigi Ball.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('header ul');
+
+        mobileMenuBtn.addEventListener('click', function () {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('header a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const animatedElements = document.querySelectorAll('.animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(element => {
+                element.style.animationPlayState = 'paused';
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+
+</html>
