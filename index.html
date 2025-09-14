@@ -161,9 +161,10 @@
         .text p {
             font-size: 17px;
             line-height: 1.6;
-            span{
-                font-weight: 800;
-            }
+        }
+
+        .text p span {
+            font-weight: 800;
         }
 
         /* Products Section - UPDATED TO GRID LAYOUT */
@@ -210,9 +211,10 @@
             position: relative;
             transition: all 0.3s ease;
             background: white;
-            h4{
-                color: #5D6863;
-            }
+        }
+
+        .product-card h4 {
+            color: #5D6863;
         }
 
         .product-card:hover {
@@ -242,6 +244,30 @@
             font-size: 14px;
             line-height: 1.5;
             color: #666;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #5D6863;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn {
+            background-color: #D8B26E;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #c49d5c;
         }
 
         /* Why Us Section */
@@ -327,6 +353,173 @@
 
         .gallery-item:hover .gallery-img {
             transform: scale(1.1);
+        }
+
+        /* Shopping Cart Styles */
+        .cart-icon-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #D8B26E;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-panel {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            width: 350px;
+            height: calc(100vh - 100px);
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-panel.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-title {
+            font-size: 24px;
+            color: #5D6863;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #5D6863;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #5D6863;
+        }
+
+        .cart-item-price {
+            color: #D8B26E;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 30px;
+            text-align: center;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .remove-item {
+            color: #ff6b6b;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cart-summary {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .checkout-btn {
+            background-color: #D8B26E;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #c49d5c;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            color: #999;
+            margin-top: 40px;
         }
 
         /* Footer - UPDATED WITH PROPER ICONS */
@@ -503,6 +696,10 @@
             .gallery-item {
                 height: 450px;
             }
+
+            .cart-panel {
+                width: 300px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -594,6 +791,13 @@
                 /* Keep tall images on mobile */
             }
 
+            .cart-panel {
+                width: 100%;
+                right: -100%;
+                top: 80px;
+                height: calc(100vh - 80px);
+            }
+
             .footer-container {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -645,6 +849,47 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Mobile cart: show single cart icon on mobile while desktop .icons hidden */
+.mobile-cart-icon {
+    display: none;           /* shown only on small screens via media query */
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.mobile-cart-icon img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* Ensure cart-count looks good both for desktop and mobile */
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #D8B26E;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0;
+}
+
+/* On small screens show mobile cart and hide the full .icons block */
+@media (max-width: 768px) {
+    .icons { display: none; }          /* keep existing behavior */
+    .mobile-cart-icon { display: flex; }
+}
+
+.mobile-menu-btn { display: none !important; }
+
     </style>
 </head>
 
@@ -669,6 +914,10 @@
         </ul>
 
         <div class="icons">
+            <div class="cart-icon-container">
+                <img src="images/cart.png" alt="Shopping Cart" id="cart-icon">
+                <span class="cart-count">0</span>
+            </div>
             <a href="https://www.instagram.com/tabigi_balkz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                 <img src="images/instagram.png" alt="Instagram">
             </a>
@@ -679,7 +928,33 @@
                 <img src="images/apple.png" alt="WhatsApp">
             </a>
         </div>
+
+        <!-- mobile cart icon (visible only on small screens) -->
+        <div class="mobile-cart-icon" aria-hidden="false">
+            <img src="images/cart.png" alt="Mobile Cart" id="cart-icon-mobile">
+            <span class="cart-count">0</span>
+        </div>
+
     </header>
+
+    <!-- Shopping Cart Panel -->
+    <div class="cart-panel">
+        <div class="cart-header">
+            <h3 class="cart-title">Менің себетім</h3>
+            <button class="close-cart">✕</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <p class="empty-cart-message">Себетіңіз бос</p>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Барлығы:</span>
+                <span id="cart-total-price">0 ₸</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">Тапсырыс беру</button>
+        </div>
+    </div>
 
     <section id="welcome" class="welcome">
         <img src="images/Honey-Nutrition.jpg" alt="Honey Nutrition" id="main-img">
@@ -687,10 +962,12 @@
             <img src="images/photo_2025-09-01_15-40-41.jpg" alt="About Me">
             <div class="text">
                 <h1>Мен Туралы</h1>
-                <p><span>Сәлем!</span> Менің атым – Хамза. Бал саласындағы жолымды 2022 жылы, 12 жасымда бастадым. Осы уақыт ішінде Қазақстанның
-                түкпір-түкпірінен түрлі бал жинап, оны тиімді бағада ұсынып келемін.
-                Менің мақсатым – өз кәсібімді дамытып қана қоймай, сіздерге зиянды қанттың орнын сапалы әрі табиғи балмен алмастыруға
-                көмектесу.</p>
+                <p><span>Сәлем!</span> Менің атым – Хамза. Бал саласындағы жолымды 2022 жылы, 12 жасымда бастадым. Осы
+                    уақыт ішінде Қазақстанның
+                    түкпір-түкпірінен түрлі бал жинап, оны тиімді бағада ұсынып келемін.
+                    Менің мақсатым – өз кәсібімді дамытып қана қoyмай, сіздерге зиянды қанттың орнын сапалы әрі табиғи
+                    балмен алмастыруға
+                    көмектесу.</p>
             </div>
         </div>
     </section>
@@ -703,9 +980,12 @@
                 <img src="images/Aqqurai.jpg" alt="Flower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Аққурай Балы</h3>
-                    <p class="product-description">Аққурай балы – ақшыл түсті, нәзік иісті бал. Асқазан-ішек жолдарын тыныштандырып, жүйке жүйесін қалыпқа келтіруге
-                    көмектеседі.</p>
-                    <h4>3300tg</h4>
+                    <p class="product-description">Аққурай балы – ақшыл түсті, нәзік иісті бал. Асқазан-ішек жолдарын
+                        тыныштандырып, жүйке жүйесін қалыпқа келтіруге
+                        көмектеседі.</p>
+                    <div class="product-price">3300 ₸</div>
+                    <button class="add-to-cart-btn" data-id="1" data-name="Аққурай Балы" data-price="3300"
+                        data-image="images/Aqqurai.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -714,8 +994,11 @@
                 <img src="images/Exporset.jpg" alt="Forest Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Экспорцет Балы</h3>
-                    <p class="product-description">Экпортцет балы – сирек кездесетін дәрілік өсімдіктерден жиналады. Иммунитетті күшейтіп, қабынуға қарсы әсер береді.</p>
-                    <h4>3000tg</h4>
+                    <p class="product-description">Экпортцет балы – сирек кездесетін дәрілік өсімдіктерден жиналады.
+                        Иммунитетті күшейтіп, қабынуға қарсы әсер береді.</p>
+                    <div class="product-price">3000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="2" data-name="Экспорцет Балы" data-price="3000"
+                        data-image="images/Exporset.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -724,8 +1007,11 @@
                 <img src="images/Grechiha.jpg" alt="Lavender Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Гречиха Балы</h3>
-                    <p class="product-description">Гречиха (қарақұмық) балы – қою түсті, дәмі қанық. Қан айналымын жақсартып, гемоглобинді көтеруге пайдалы.</p>
-                    <h4>2800tg</h4>
+                    <p class="product-description">Гречиха (қарақұмық) балы – қою түсті, дәмі қанық. Қан айналымын
+                        жақсартып, гемоглобинді көтеруге пайдалы.</p>
+                    <div class="product-price">2800 ₸</div>
+                    <button class="add-to-cart-btn" data-id="3" data-name="Гречиха Балы" data-price="2800"
+                        data-image="images/Grechiha.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -734,8 +1020,11 @@
                 <img src="images/Kunbagys.jpg" alt="Acacia Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Күнбағыс Балы</h3>
-                    <p class="product-description">Күнбағыс балы – ашық сары түсті, тез қатаятын бал. Жүрек пен қан тамырларына жақсы әсер етеді, ағзаны қуаттандырады.</p>
-                    <h4>2600tg</h4>
+                    <p class="product-description">Күнбағыс балы – ашық сары түсті, тез қатаятын бал. Жүрек пен қан
+                        тамырларына жақсы әсер етеді, ағзаны қуаттандырады.</p>
+                    <div class="product-price">2600 ₸</div>
+                    <button class="add-to-cart-btn" data-id="4" data-name="Күнбағыс Балы" data-price="2600"
+                        data-image="images/Kunbagys.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -744,8 +1033,11 @@
                 <img src="images/Kuskut.jpg" alt="Buckwheat Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Кускут Балы</h3>
-                    <p class="product-description">Кускут (паразит өсімдік) балы – емдік қасиеті жоғары, ерекше хош иісті. Бауыр мен ас қорыту жүйесіне пайдалы.</p>
-                    <h4>3600tg</h4>
+                    <p class="product-description">Кускут (паразит өсімдік) балы – емдік қасиеті жоғары, ерекше хош
+                        иісті. Бауыр мен ас қорыту жүйесіне пайдалы.</p>
+                    <div class="product-price">3600 ₸</div>
+                    <button class="add-to-cart-btn" data-id="5" data-name="Кускут Балы" data-price="3600"
+                        data-image="images/Kuskut.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -754,8 +1046,11 @@
                 <img src="images/Raznotravie.jpg" alt="Manuka Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Разнотравие Балы</h3>
-                    <p class="product-description">Разнотравие (шөп балдары) – түрлі гүлдерден жиналған бал. Жалпы иммунитетті көтеріп, суық тиюден қорғайды.</p>
-                    <h4>2800tg</h4>
+                    <p class="product-description">Разнотравие (шөп балдары) – түрлі гүлдерден жиналған бал. Жалпы
+                        иммунитетті көтеріп, суық тиюден қорғайды.</p>
+                    <div class="product-price">2800 ₸</div>
+                    <button class="add-to-cart-btn" data-id="6" data-name="Разнотравие Балы" data-price="2800"
+                        data-image="images/Raznotravie.jpg">Себетке қосу</button>
                 </div>
             </div>
 
@@ -764,8 +1059,11 @@
                 <img src="images/Zhantaq.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Жантақ Балы</h3>
-                    <p class="product-description">Жантақ балы – түсі ашық, дәмі жұмсақ әрі тез кристалданбайды. Асқазан ауруларына пайдалы және қуат береді.</p>
-                    <h4>3000tg</h4>
+                    <p class="product-description">Жантақ балы – түсі ашық, дәмі жұмсақ әрі тез кристалданбайды. Асқазан
+                        ауруларына пайдалы және қуат береді.</p>
+                    <div class="product-price">3000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="7" data-name="Жантақ Балы" data-price="3000"
+                        data-image="images/Zhantaq.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 8 -->
@@ -773,9 +1071,12 @@
                 <img src="images/Diagil.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Дягиль Балы</h3>
-                    <p class="product-description">Дягиль балы – қою қоңыр түсті, өзіндік хош иісі бар сирек бал. Қан қысымын реттеуге, жүйке жүйесін тыныштандыруға және
-                    күш-қуатты арттыруға пайдалы.</p>
-                    <h4>3800tg</h4>
+                    <p class="product-description">Дягиль балы – қою қоңыр түсті, өзіндік хош иісі бар сирек бал. Қан
+                        қысымын реттеуге, жүйке жүйесін тыныштандыруға және
+                        күш-қуатты арттыруға пайдалы.</p>
+                    <div class="product-price">3800 ₸</div>
+                    <button class="add-to-cart-btn" data-id="8" data-name="Дягиль Балы" data-price="3800"
+                        data-image="images/Diagil.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 9 -->
@@ -783,9 +1084,12 @@
                 <img src="images/Peschannaia Akkasia.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Песчанная Аккация</h3>
-                    <p class="product-description">Песчанная акация балы – ашық түсті, дәмі нәзік әрі хош иісті. Асқазанды тыныштандырады, ұйқыны жақсартады және
-                    иммунитетті көтереді.</p>
-                    <h4>3000tg</h4>
+                    <p class="product-description">Песчанная акация балы – ашық түсті, дәмі нәзік әрі хош иісті.
+                        Асқазанды тыныштандырады, ұйқыны жақсартады және
+                        иммунитетті көтереді.</p>
+                    <div class="product-price">3000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="9" data-name="Песчанная Аккация" data-price="3000"
+                        data-image="images/Peschannaia Akkasia.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 10 -->
@@ -793,8 +1097,11 @@
                 <img src="images/Propolis.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Прополис</h3>
-                    <p class="product-description">Прополис – араның табиғи антибиотигі. Микробтарға қарсы әсер етіп, жара жазуды тездетеді.</p>
-                    <h4>1000-1400tg</h4>
+                    <p class="product-description">Прополис – араның табиғи антибиотигі. Микробтарға қарсы әсер етіп,
+                        жара жазуды тездетеді.</p>
+                    <div class="product-price">1000-1400 ₸</div>
+                    <button class="add-to-cart-btn" data-id="10" data-name="Прополис" data-price="1200"
+                        data-image="images/Propolis.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 11 -->
@@ -802,8 +1109,11 @@
                 <img src="images/Pchelinoe moloko.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Ара сүті</h3>
-                    <p class="product-description">Ара сүті (патша сүті) – аралар тек патшайымды қоректендіретін құнды өнім. Жасартушы әсерге ие, иммунитетті көтереді.</p>
-                    <h4>12000tg</h4>
+                    <p class="product-description">Ара сүті (патша сүті) – аралар тек патшайымды қоректендіретін құнды
+                        өнім. Жасартушы әсерге ие, иммунитетті көтереді.</p>
+                    <div class="product-price">12000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="11" data-name="Ара сүті" data-price="12000"
+                        data-image="images/Pchelinoe moloko.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 12 -->
@@ -811,8 +1121,11 @@
                 <img src="images/Pchelinye Pylsa.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Ара тозаңы</h3>
-                    <p class="product-description">Ара тозаңы – гүлдің тозаңынан жасалған өнім. Витаминдерге бай, шаршауды басып, ағзаны күшейтеді.</p>
-                    <h4>6000tg</h4>
+                    <p class="product-description">Ара тозаңы – гүлдің тозаңынан жасалған өнім. Витаминдерге бай,
+                        шаршауды басып, ағзады күшейтеді.</p>
+                    <div class="product-price">6000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="12" data-name="Ара тозаңы" data-price="6000"
+                        data-image="images/Pchelinye Pylsa.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 13 -->
@@ -820,8 +1133,11 @@
                 <img src="images/Perga.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Перга</h3>
-                    <p class="product-description">Перга (ара наны) – аралар сақтап, ашыту арқылы жасаған тозаң. Қан құрамын жақсартып, ағзаны минералдармен толықтырады.</p>
-                    <h4>5000tg/200g</h4>
+                    <p class="product-description">Перга (ара наны) – аралар сақтап, ашыту арқылы жасаған тозаң. Қан
+                        құрамын жақсартып, ағзаны минералдармен толықтырады.</p>
+                    <div class="product-price">5000 ₸/200g</div>
+                    <button class="add-to-cart-btn" data-id="13" data-name="Перга" data-price="5000"
+                        data-image="images/Perga.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 14 -->
@@ -829,9 +1145,12 @@
                 <img src="images/Soty.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Ара ұясы - Соты</h3>
-                    <p class="product-description">Кішкене ара ұяшықтары – аралар бал мен тозаңды сақтайтын ұсақ алтыбұрышты көзшелер. Олар балдың табиғи тазалығын сақтап,
-                    ұзақ уақыт бүлінбеуіне көмектеседі.</p>
-                    <h4>1000-1500tg</h4>
+                    <p class="product-description">Кішкене ара ұяшықтары – аралар бал мен тозаңды сақтайтын ұсақ
+                        алтыбұрышты көзшелер. Олар балдың табиғи тазалығын сақтап,
+                        ұзақ уақыт бүлінбеуіне көмектеседі.</p>
+                    <div class="product-price">1000-1500 ₸</div>
+                    <button class="add-to-cart-btn" data-id="14" data-name="Ара ұясы - Соты" data-price="1250"
+                        data-image="images/Soty.jpg">Себетке қосу</button>
                 </div>
             </div>
             <!-- Product 15 -->
@@ -839,9 +1158,12 @@
                 <img src="images/Uiadagi bal 2.jpg" alt="Wildflower Honey" class="product-image">
                 <div class="product-info">
                     <h3 class="product-title">Араның ұясы - Соты</h3>
-                    <p class="product-description">Ара ұясы – балауыздан жасалған табиғи құрылым, онда аралар бал сақтайды және ұрпақ өсіреді. Ол адамға пайдалы балауыз,
-                    бал, прополис және перга секілді өнімдердің көзі болып табылады.</p>
-                    <h4>15000tg</h4>
+                    <p class="product-description">Ара ұясы – балауыздан жасалған табиғи құрылым, онда аралар бал
+                        сақтайды және ұрпақ өсіреді. Ол адамға пайдалы балауыз,
+                        бал, прополис және перга секілді өнімдердің көзі болып табылады.</p>
+                    <div class="product-price">15000 ₸</div>
+                    <button class="add-to-cart-btn" data-id="15" data-name="Араның ұясы - Соты" data-price="15000"
+                        data-image="images/Uiadagi bal 2.jpg">Себетке қосу</button>
                 </div>
             </div>
         </div>
@@ -854,21 +1176,24 @@
             <div class="feature-card animate">
                 <span class="feature-icon">🏆</span>
                 <h3 class="feature-title">Табиғи Өндіріс пен Жоғары Сапа</h3>
-                <p class="feature-description">Біздің бал тек табиғи гүлдерден жиналады, құрамында химиялық қоспалар жоқ. Әрбір банка бал мұқият тексеріліп, жоғары
-                сапа стандарттарына сай ұсынылады.
+                <p class="feature-description">Біздің бал тек табиғи гүлдерден жиналады, құрамында химиялық қоспалар
+                    жоқ. Әрбір банка бал мұқият тексеріліп, жоғары
+                    сапа стандарттарына сай ұсынылады.
                 </p>
             </div>
 
             <div class="feature-card animate">
                 <span class="feature-icon">🚚</span>
                 <h3 class="feature-title">Жылдам жеткізу – Шамалған бойынша</h3>
-                <p class="feature-description">Уақытыңызды бағалаймыз, сондықтан балды үйіңіздің табалдырығына дейін тез әрі ыңғайлы жеткізіп береміз.</p>
+                <p class="feature-description">Уақытыңызды бағалаймыз, сондықтан балды үйіңіздің табалдырығына дейін тез
+                    әрі ыңғайлы жеткізіп береміз.</p>
             </div>
 
             <div class="feature-card animate">
                 <span class="feature-icon">🌱</span>
                 <h3 class="feature-title">Түрлі Түйіндер (Әр алуандылық)</h3>
-                <p class="feature-description">Клиенттерімізге әртүрлі бал түрлерін ұсынамыз. Әрқайсысы ерекше дәмімен және пайдалы қасиеттерімен ерекшеленеді.</p>
+                <p class="feature-description">Клиенттерімізге әртүрлі бал түрлерін ұсынамыз. Әрқайсысы ерекше дәмімен
+                    және пайдалы қасиеттерімен ерекшеленеді.</p>
             </div>
         </div>
     </section>
@@ -879,8 +1204,9 @@
                     <img src="images/Tabigi Bal Logo.jpg" alt="Tabigi Ball Logo">
                     <h3>Tabigi Bal</h3>
                 </div>
-                <p class="footer-description">Табиғи бал өндірісі. Көпжылдық тәжірибе мен араға деген сүйіспеншілік арқылы жұмыс істейміз. Табиғат пен оның сыйлаған
-                байлығына сүйене отырып, біздің араларымыз ұрпақтан-ұрпаққа ең таза бал өндіруді жалғастыруда.</p>
+                <p class="footer-description">Табиғи бал өндірісі. Көпжылдық тәжірибе мен араға деген сүйіспеншілік
+                    арқылы жұмыс істейміз. Табиғат пен оның сыйлаған
+                    байлығына сүйене отырып, біздің араларымыз ұрпақтан-ұрпаққа ең таза бал өндіруді жалғастыруда.</p>
                 <div class="footer-social">
                     <a href="https://www.instagram.com/tabigi_balkz">
                         <img src="images/instagram.png" alt="Instagram">
@@ -925,23 +1251,259 @@
     </footer>
 
     <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('header ul');
+        // Shopping cart functionality (updated: mobile cart & hide zero count)
+        let cart = [];
+        const cartPanel = document.querySelector('.cart-panel');
+        const closeCartBtn = document.querySelector('.close-cart');
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 
-        mobileMenuBtn.addEventListener('click', function () {
-            navMenu.classList.toggle('active');
-        });
+        // Select both desktop and mobile cart icons (one may be hidden via CSS)
+        const cartIconDesktop = document.getElementById('cart-icon'); // existing
+        const cartIconMobile = document.getElementById('cart-icon-mobile'); // newly added
+        const cartIconElements = [];
+        if (cartIconDesktop) cartIconElements.push(cartIconDesktop);
+        if (cartIconMobile) cartIconElements.push(cartIconMobile);
 
-        // Close menu when clicking on a link
-        const navLinks = document.querySelectorAll('header a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                navMenu.classList.remove('active');
+        const cartCountElements = () => document.querySelectorAll('.cart-count');
+
+        // Initialize cart from localStorage if available
+        function initCart() {
+            const savedCart = localStorage.getItem('tabigiBalCart');
+            if (savedCart) {
+                try {
+                    cart = JSON.parse(savedCart);
+                } catch (e) {
+                    cart = [];
+                }
+            } else {
+                cart = [];
+            }
+            updateCartUI();
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('tabigiBalCart', JSON.stringify(cart));
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            // Update cart count (sum of quantities)
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+            // Update all count elements (desktop + mobile)
+            const counts = cartCountElements();
+            counts.forEach(el => {
+                if (totalItems === 0) {
+                    el.style.display = 'none';
+                } else {
+                    el.style.display = 'flex';
+                    el.textContent = totalItems;
+                }
+            });
+
+            // Update cart items list
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-message">Себетіңіз бос</p>';
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${item.price} ₸</div>
+                            <div class="cart-item-quantity">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                                <button class="remove-item" data-id="${item.id}">🗑️</button>
+                            </div>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+            }
+
+            // Update total price
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalPrice.textContent = `${total} ₸`;
+
+            // Add event listeners to dynamic elements (quantity and remove)
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.removeEventListener('click', decreaseQuantity);
+                btn.addEventListener('click', decreaseQuantity);
+            });
+
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.removeEventListener('click', increaseQuantity);
+                btn.addEventListener('click', increaseQuantity);
+            });
+
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.removeEventListener('change', updateQuantity);
+                input.addEventListener('change', updateQuantity);
+            });
+
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.removeEventListener('click', removeItem);
+                btn.addEventListener('click', removeItem);
+            });
+
+            // Save cart
+            saveCart();
+        }
+
+        // Add to cart function
+        function addToCart(event) {
+            const button = event.currentTarget;
+            const id = button.getAttribute('data-id');
+            const name = button.getAttribute('data-name');
+            const price = parseInt(button.getAttribute('data-price')) || 0;
+            const image = button.getAttribute('data-image');
+
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    image,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+
+            showNotification(`${name} себетке қосылды`);
+        }
+
+        // Decrease quantity
+        function decreaseQuantity(event) {
+            const id = event.target.getAttribute('data-id');
+            const item = cart.find(item => item.id === id);
+
+            if (!item) return;
+
+            if (item.quantity > 1) {
+                item.quantity -= 1;
+            } else {
+                cart = cart.filter(i => i.id !== id);
+            }
+
+            updateCartUI();
+        }
+
+        // Increase quantity
+        function increaseQuantity(event) {
+            const id = event.target.getAttribute('data-id');
+            const item = cart.find(item => item.id === id);
+            if (!item) return;
+            item.quantity += 1;
+            updateCartUI();
+        }
+
+        // Update quantity from input
+        function updateQuantity(event) {
+            const id = event.target.getAttribute('data-id');
+            let quantity = parseInt(event.target.value);
+            if (isNaN(quantity) || quantity < 1) quantity = 1;
+            const item = cart.find(item => item.id === id);
+
+            if (item) {
+                item.quantity = quantity;
+            }
+
+            updateCartUI();
+        }
+
+        // Remove item from cart
+        function removeItem(event) {
+            const id = event.target.getAttribute('data-id');
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        // Show notification (small toast)
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#5D6863';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '10000';
+            notification.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+            notification.style.opacity = '1';
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    if (notification && notification.parentNode) notification.parentNode.removeChild(notification);
+                }, 500);
+            }, 1800);
+        }
+
+        // Checkout function (opens WhatsApp)
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Себет бос, тапсырыс беру мүмкін емес');
+                return;
+            }
+
+            let message = "Сәлем! Мен Tabigi Bal-дан тапсырыс бергім келеді:%0A%0A";
+            cart.forEach(item => {
+                message += `- ${item.name} x ${item.quantity} = ${item.price * item.quantity} ₸%0A`;
+            });
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0AБарлығы: ${total} ₸%0A%0A`;
+            message += "Менің атым: [Есіміңізді енгізіңіз]%0A";
+            message += "Менің телефоным: [Телефон нөміріңізді енгізіңіз]%0A";
+            message += "Жеткізу мекенжайы: [Мекенжайды енгізіңіз]";
+
+            window.open(`https://wa.me/77007380979?text=${message}`, '_blank');
+        }
+
+        // Event listeners for opening cart (both desktop and mobile icons)
+        cartIconElements.forEach(iconEl => {
+            iconEl.addEventListener('click', () => {
+                cartPanel.classList.add('open');
             });
         });
 
-        // Animation on scroll
+        // close cart
+        closeCartBtn.addEventListener('click', () => {
+            cartPanel.classList.remove('open');
+        });
+
+        // Add to cart buttons
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', addToCart);
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener('click', checkout);
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initCart);
+
+        // Mobile menu already present in original code; no change here
+        // Animation on scroll (keep original behavior)
         document.addEventListener('DOMContentLoaded', function () {
             const animatedElements = document.querySelectorAll('.animate');
             const observer = new IntersectionObserver((entries) => {
@@ -959,6 +1521,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>
